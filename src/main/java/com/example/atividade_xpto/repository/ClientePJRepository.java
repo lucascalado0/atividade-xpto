@@ -1,4 +1,12 @@
 package com.example.atividade_xpto.repository;
 
-public interface ClientePJRepository {
+import com.example.atividade_xpto.core.models.ClientePJ;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface ClientePJRepository extends JpaRepository<ClientePJ, Long> {
+    Optional<ClientePJ> findByCnpj(String cnpj);
 }
