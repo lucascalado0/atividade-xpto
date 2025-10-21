@@ -51,7 +51,8 @@ public class ClientePFController {
 
     @PutMapping("/{cpf}")
     public ResponseEntity<ClientePFDTO> atualizarClientePF(@PathVariable String cpf, @Valid @RequestBody ClientePFDTO clientePFDTO) {
-        ClientePF clientePFAtualizado = clientePFService.atualizarClientePF(cpf, clientePFDTO);
+        ClientePF clientePF = clientePFMapper.toEntity(clientePFDTO);
+        ClientePF clientePFAtualizado = clientePFService.atualizarClientePF(cpf, clientePF);
         return ResponseEntity.ok(clientePFMapper.toDTO(clientePFAtualizado));
     }
 
