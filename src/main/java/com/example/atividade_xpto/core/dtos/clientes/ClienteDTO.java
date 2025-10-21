@@ -20,7 +20,7 @@ public class ClienteDTO {
 
     @NotBlank
     private String email;
-    
+
     private List<EnderecoDTO> enderecos;
 
     private List<ContaDTO> contas;
