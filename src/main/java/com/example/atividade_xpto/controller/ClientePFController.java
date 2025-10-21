@@ -42,9 +42,7 @@ public class ClientePFController {
     public ResponseEntity<List<ClientePFDTO>> obterTodosClientesPF() {
         List<ClientePF> clientesPF = clientePFService.findAll();
 
-        List<ClientePFDTO> dtos = clientesPF.stream()
-                .map(clientePFMapper::toDTO)
-                .toList();
+        List<ClientePFDTO> dtos = clientePFMapper.toDTOList(clientesPF);
 
         return ResponseEntity.ok(dtos);
     }
