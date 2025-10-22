@@ -97,5 +97,135 @@ classDiagram
     ClientePJ --|> Cliente : é um
 ```
 
+<h3>Tabela de endpoints e suas funcionalidades</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Controller</th>
+      <th>Endpoint</th>
+      <th>Método HTTP</th>
+      <th>Função</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>EnderecoController</td>
+        <td>/enderecos/{id}</td>
+        <td>GET</td>
+        <td>Buscar endereço pelo ID</td>
+        </tr>
+    <tr>
+        <td>EnderecoController</td>
+        <td>/enderecos/{id}</td>
+        <td>PUT</td>
+        <td>Atualizar um endereço existente</td>
+    </tr>
+    <tr>
+        <td>EnderecoController</td>
+        <td>/enderecos/{id}</td>
+        <td>DELETE</td>
+        <td>Excluir um endereço pelo ID</td>
+    </tr>
+    <tr>
+        <td>EnderecoController</td>
+        <td>/enderecos</td><td>GET</td>
+        <td>Listar todos os endereços cadastrados</td>
+    </tr>
+    <tr>
+        <td>EnderecoController</td>
+        <td>/enderecos</td>
+        <td>POST</td>
+        <td>Cadastrar um novo endereço</td>
+    </tr>
+    <tr>
+        <td>ContaController</td>
+        <td>/contas/{id}</td>
+        <td>GET</td><td>Buscar conta pelo ID</td>
+    </tr>
+    <tr>
+        <td>ContaController</td>
+        <td>/contas/{id}</td>
+        <td>PUT</td>
+        <td>Atualizar uma conta existente</td>
+    </tr>
+    <tr>
+        <td>ContaController</td>
+        <td>/contas</td>
+        <td>GET</td>
+        <td>Listar todas as contas cadastradas</td>
+    </tr>
+    <tr>
+        <td>ContaController</td>
+        <td>/contas</td>
+        <td>POST</td>
+        <td>Cadastrar uma nova conta</td>
+    </tr>
+    <tr>
+        <td>ClientePJController</td>
+        <td>/clientes-pj/{cnpj}</td>
+        <td>GET</td>
+        <td>Buscar cliente PJ pelo CNPJ</td>
+    </tr>
+    <tr>
+        <td>ClientePJController</td>
+        <td>/clientes-pj/{cnpj}</td>
+        <td>PUT</td>
+        <td>Atualizar dados de um cliente PJ</td>
+    </tr>
+    <tr>
+        <td>ClientePJController</td>
+        <td>/clientes-pj/{cnpj}</td>
+        <td>DELETE</td>
+        <td>Excluir cliente PJ pelo CNPJ</td>
+    </tr>
+    <tr>
+        <td>ClientePJController</td>
+        <td>/clientes-pj</td>
+        <td>GET</td>
+        <td>Listar todos os clientes PJ cadastrados</td>
+    </tr>
+    <tr>
+        <td>ClientePJController</td>
+        <td>/clientes-pj</td>
+        <td>POST</td>
+        <td>Cadastrar um novo cliente PJ</td>
+    </tr>
+    <tr>
+        <td>ClientePFController</td>
+        <td>/clientes-pf/{cpf}</td>
+        <td>GET</td>
+        <td>Buscar cliente PF pelo CPF</td>
+    </tr>
+    <tr>
+        <td>ClientePFController</td>
+        <td>/clientes-pf/{cpf}</td>
+        <td>PUT</td>
+        <td>Atualizar dados de um cliente PF</td>
+    </tr>
+    <tr>
+        <td>ClientePFController</td>
+        <td>/clientes-pf/{cpf}</td>
+        <td>DELETE</td>
+        <td>Excluir cliente PF pelo CPF</td>
+    </tr>
+    <tr>
+        <td>ClientePFController</td>
+        <td>/clientes-pf</td>
+        <td>GET</td>
+        <td>Listar todos os clientes PF cadastrados</td>
+    </tr>
+    <tr>
+        <td>ClientePFController</td>
+        <td>/clientes-pf</td>
+        <td>POST</td>
+        <td>Cadastrar um novo cliente PF</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Atenção, ao utilizar os métodos post, não precisa declarar id, pois esse campo é gerado automaticamente</h3>
+
+
 
 
