@@ -4,6 +4,10 @@ package com.example.atividade_xpto.infra;
 import com.example.atividade_xpto.exception.clientes.ClienteArgumentException;
 import com.example.atividade_xpto.exception.clientes.ClienteJaExistenteException;
 import com.example.atividade_xpto.exception.clientes.ClienteNotFoundException;
+import com.example.atividade_xpto.exception.contas.ContaArgumentException;
+import com.example.atividade_xpto.exception.contas.ContaNotFoundException;
+import com.example.atividade_xpto.exception.enderecos.EnderecoArgumentException;
+import com.example.atividade_xpto.exception.enderecos.EnderecoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,5 +35,29 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<RestErrorMensagem> ClienteJaExistenteHandler(Exception exception){
         RestErrorMensagem restErrorMensagem = new RestErrorMensagem(HttpStatus.CONFLICT, exception.getMessage(), LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(restErrorMensagem);
+    }
+
+    @ExceptionHandler(ContaArgumentException.class)
+    private ResponseEntity<RestErrorMensagem> ContaArgumentHandler(ContaArgumentException exception){
+        RestErrorMensagem restErrorMensagem = new RestErrorMensagem(HttpStatus.BAD_REQUEST, exception.getMessage(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(restErrorMensagem);
+    }
+
+    @ExceptionHandler(ContaNotFoundException.class)
+    private ResponseEntity<RestErrorMensagem> ContaNotFoundHandler(ContaNotFoundException exception){
+        RestErrorMensagem restErrorMensagem = new RestErrorMensagem(HttpStatus.NOT_FOUND, exception.getMessage(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(restErrorMensagem);
+    }
+
+    @ExceptionHandler(EnderecoArgumentException.class)
+    private ResponseEntity<RestErrorMensagem> EnderecoArgumentHandler(EnderecoArgumentException exception){
+        RestErrorMensagem restErrorMensagem = new RestErrorMensagem(HttpStatus.BAD_REQUEST, exception.getMessage(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(restErrorMensagem);
+    }
+
+    @ExceptionHandler(EnderecoNotFoundException.class)
+    private ResponseEntity<RestErrorMensagem> EnderecoNotFoundHandler(EnderecoNotFoundException exception){
+        RestErrorMensagem restErrorMensagem = new RestErrorMensagem(HttpStatus.NOT_FOUND, exception.getMessage(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(restErrorMensagem);
     }
 }
