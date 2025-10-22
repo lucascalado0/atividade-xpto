@@ -16,7 +16,7 @@
 
 <hr>
 
-<h3>Acesse a documentação e Endpoints</h3>
+<h3>Acesse a documentação e teste os Endpoints</h3>
 <p>http://localhost:8080/swagger-ui/index.html</p>
 
 <h3>Diagrama de Classes<h3>
