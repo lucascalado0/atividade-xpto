@@ -1,11 +1,12 @@
 package com.example.atividade_xpto.core.dtos.clientes;
 
-import com.example.atividade_xpto.core.dtos.contas.ContaDTO;
-import com.example.atividade_xpto.core.dtos.enderecos.EnderecoDTO;
+import com.example.atividade_xpto.core.dtos.conta.ContaDTO;
+import com.example.atividade_xpto.core.dtos.endereco.EnderecoDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -20,6 +21,8 @@ public class ClienteDTO {
 
     @NotBlank
     private String email;
+
+    private LocalDateTime dataCadastro = LocalDateTime.now();
 
     private List<EnderecoDTO> enderecos;
 
