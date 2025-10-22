@@ -3,7 +3,7 @@ package com.example.atividade_xpto.controller;
 import com.example.atividade_xpto.core.dtos.enderecos.EnderecoDTO;
 import com.example.atividade_xpto.core.mappers.EnderecoMapper;
 import com.example.atividade_xpto.core.models.Endereco;
-import com.example.atividade_xpto.service.impl.EnderecoServiceImpl;
+import com.example.atividade_xpto.service.EnderecoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping("/enderecos")
 public class EnderecoController {
 
-    private final EnderecoServiceImpl enderecoService;
+    private final EnderecoService enderecoService;
     private final EnderecoMapper enderecoMapper;
 
-    public EnderecoController(EnderecoServiceImpl enderecoService, EnderecoMapper enderecoMapper) {
+    public EnderecoController(EnderecoService enderecoService, EnderecoMapper enderecoMapper) {
         this.enderecoService = enderecoService;
         this.enderecoMapper = enderecoMapper;
     }

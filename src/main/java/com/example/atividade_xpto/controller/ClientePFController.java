@@ -4,7 +4,7 @@ import com.example.atividade_xpto.core.dtos.clientes.ClientePFDTO;
 import com.example.atividade_xpto.core.mappers.ClientePFMapper;
 import com.example.atividade_xpto.exception.clientes.ClienteNotFoundException;
 import com.example.atividade_xpto.core.models.ClientePF;
-import com.example.atividade_xpto.service.impl.ClientePFServiceImpl;
+import com.example.atividade_xpto.service.ClientePFService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping("/clientes-pf")
 public class ClientePFController {
 
-    private final ClientePFServiceImpl clientePFService;
+    private final ClientePFService clientePFService;
     private final ClientePFMapper clientePFMapper;
 
-    public ClientePFController(ClientePFServiceImpl clientePFService, ClientePFMapper clientePFMapper) {
+    public ClientePFController(ClientePFService clientePFService, ClientePFMapper clientePFMapper) {
         this.clientePFService = clientePFService;
         this.clientePFMapper = clientePFMapper;
     }
@@ -40,7 +40,7 @@ public class ClientePFController {
 
     @GetMapping
     public ResponseEntity<List<ClientePFDTO>> obterTodosClientesPF() {
-        List<ClientePF> clientesPF = clientePFService.findAll();
+        List<ClientePF> clientesPF = clientePFService.listarClientesPF();
 
         List<ClientePFDTO> dtos = clientePFMapper.toDTOList(clientesPF);
 
@@ -58,7 +58,7 @@ public class ClientePFController {
     public ResponseEntity<Void> deletarClientePFPorCpf(@PathVariable String cpf) {
         ClientePF clientePF = clientePFService.findByCpf(cpf)
                 .orElseThrow(() -> new ClienteNotFoundException("Cliente com CPF " + cpf + " não encontrado."));
-        clientePFService.deleteById(clientePF.getId());
+        clientePFService.deleteByCpf(clientePF.getCpf());
         return ResponseEntity.noContent().build();
     }
 }
