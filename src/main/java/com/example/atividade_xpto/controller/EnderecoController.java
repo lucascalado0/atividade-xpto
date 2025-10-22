@@ -26,7 +26,7 @@ public class EnderecoController {
     @PostMapping
     public ResponseEntity<EnderecoDTO> novoEndereco(@Valid @RequestBody  EnderecoDTO enderecoDTO) {
         Endereco endereco = enderecoMapper.toEntity(enderecoDTO);
-        Long clienteId = enderecoDTO.getClienteId(); // Supondo que o DTO tenha um campo clienteId
+        Long clienteId = enderecoDTO.getClienteId();
 
         Endereco enderecoSalvo = enderecoService.novoEndereco(endereco, clienteId);
 
