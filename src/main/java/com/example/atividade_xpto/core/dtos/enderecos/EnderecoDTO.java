@@ -1,5 +1,7 @@
 package com.example.atividade_xpto.core.dtos.enderecos;
 
+import com.example.atividade_xpto.core.dtos.clientes.ClienteDTO;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -18,4 +20,6 @@ public class EnderecoDTO {
     private String cidade;
     @NotBlank
     private String estado;
+    @JsonProperty("cliente_id")
+    private Long clienteId;
 }
