@@ -29,7 +29,7 @@ A API oferece funcionalidades para criar, ler, atualizar e deletar informações
 <li>Certifique-se de ter o Java Development Kit (JDK) - 21 instalado.</li>
 <li>Abra o projeto em sua IDE (Eclipse, IntelliJ, etc.).</li>
 <li>Configure o banco de dados no arquivo application.propperties (H2 ou PostgreSQL).</li>
-<li>Execute a classe principal que contém o método main para iniciar a aplicação Spring Boot.(Talvez seja necessário executar o comando mvn clean no terminal caso dê erro)</li>
+<li>Execute a classe principal que contém o método main para iniciar a aplicação Spring Boot.(Talvez seja necessário executar o comando <strong>mvn clean</strong> no terminal caso dê erro)</li>
 <li>Acesse a documentação da API em http://localhost:8080/swagger-ui/index.html para testar os endpoints(Ou softwares de teste como postman).</li>
 </ol>
 
@@ -38,11 +38,11 @@ A API oferece funcionalidades para criar, ler, atualizar e deletar informações
 ```mermaid
 classDiagram
     class Cliente {
-        +String cliente_id
+        +Long id
         +String nome
         +String email
         +String telefone
-        +datetime data_cadastro
+        +LocalDateTime dataCadastro
         +List~Endereco~ enderecos
         +List~Conta~ contas
     }
@@ -57,7 +57,7 @@ classDiagram
     }
 
     class Endereco {
-        +Integer id
+        +Long id
         +String rua
         +String numero
         +String bairro
@@ -68,21 +68,21 @@ classDiagram
     }
 
     class Conta {
-        +Integer id
+        +Long id
         +String agencia
-        +String numero_conta
-        +String tipo_conta
-        +Decimal saldo
-        +datetime data_criacao
+        +String numeroConta
+        +Enum tipoConta
+        +BigDecimal saldo
+        +LocalDateTime dataCriacao
         +Cliente cliente
         +List~Movimentacao~ movimentacoes
     }
 
     class Movimentacao {
-        +Integer id
-        +datetime data_movimentacao
-        +String tipo_movimentacao
-        +Decimal valor
+        +Long id
+        +LocalDateTime dataMovimentacao
+        +Enum tipoMovimentacao
+        +BigDecimal valor
         +String descricao
         +Conta conta
     }
