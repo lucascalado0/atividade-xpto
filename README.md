@@ -1,5 +1,7 @@
 # atividade-xpto
 
+#
+
 <h3>Depedências utilizadas no projeto</h3>
 <ul>
 <li>Spring JPA -> Conexão com banco de dados, mapeamento de tabelas e entidades</li>
@@ -14,7 +16,7 @@
 
 <hr>
 
-<h3>Acesse a documentação</h3>
+<h3>Acesse a documentação e Endpoints</h3>
 <p>http://localhost:8080/swagger-ui/index.html</p>
 
 <h3>Diagrama de Classes<h3>
