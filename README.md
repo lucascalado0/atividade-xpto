@@ -29,8 +29,8 @@ A API oferece funcionalidades para criar, ler, atualizar e deletar informações
 <li>Certifique-se de ter o Java Development Kit (JDK) - 21 instalado.</li>
 <li>Abra o projeto em sua IDE (Eclipse, IntelliJ, etc.).</li>
 <li>Configure o banco de dados no arquivo application.propperties (H2 ou PostgreSQL).</li>
-<li>Execute a classe principal que contém o método main para iniciar a aplicação Spring Boot.</li>
-<li>Acesse a documentação da API em http://localhost:8080/swagger-ui/index.html para testar os endpoints.(Ou softwares de teste como postman)</li>
+<li>Execute a classe principal que contém o método main para iniciar a aplicação Spring Boot.(Talvez seja necessário executar o comando mvn clean no terminal caso dê erro)</li>
+<li>Acesse a documentação da API em http://localhost:8080/swagger-ui/index.html para testar os endpoints(Ou softwares de teste como postman).</li>
 </ol>
 
 <h3>Diagrama de Classes<h3>
@@ -96,4 +96,6 @@ classDiagram
     ClientePF --|> Cliente : é um
     ClientePJ --|> Cliente : é um
 ```
+
+
 
