@@ -55,9 +55,16 @@ public class RelatorioService {
         BigDecimal valorPago = taxaPorMovimentacao.multiply(BigDecimal.valueOf(totalMovimentacoes));
 
 
-        BigDecimal saldoInicial = movimentacoes.isEmpty() ?
-                BigDecimal.ZERO :
-                movimentacoes.get(0).getConta().getSaldo();
+        BigDecimal saldoInicial;
+
+        if (!movimentacoes.isEmpty()) {
+            saldoInicial = movimentacoes.getFirst().getConta().getSaldo();
+        } else {
+            saldoInicial = cliente.getContas().stream()
+                    .map(Conta::getSaldo)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
+
 
 
         BigDecimal saldoAtual = cliente.getContas().stream()
