@@ -23,4 +23,10 @@ public class RelatorioController {
         String relatorio = relatorioService.gerarRelatorioSaldo(clienteId);
         return ResponseEntity.ok(relatorio);
     }
+
+    @GetMapping("/saldo/todos")
+    public ResponseEntity<String> gerarRelatorioTodos() {
+        String relatorio = relatorioService.gerarRelatorioTodosClientes();
+        return ResponseEntity.ok(relatorio);
+    }
 }
