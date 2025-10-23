@@ -11,5 +11,4 @@ public class AtividadeXptoApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(AtividadeXptoApplication.class, args);
 	}
-
 }
