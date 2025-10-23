@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long> {
 
-    List<Movimentacao> findByContaIdAndDataMovimentacaoBetween(Long contaId, LocalDateTime dataInicio, LocalDateTime dataFim);
+    List<Movimentacao> findByContaClienteIdAndDataMovimentacaoBetween(Long clienteId, LocalDateTime dataInicio, LocalDateTime dataFim);
 
     List<Movimentacao> findByContaClienteId(Long clienteId);
 }
