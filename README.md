@@ -221,11 +221,36 @@ classDiagram
         <td>POST</td>
         <td>Cadastrar um novo cliente PF</td>
     </tr>
+    <tr>
+        <td>MovimentacaoController</td>
+        <td>/movimentacoes</td>
+        <td>GET</td>
+        <td>Listar todas as movimentações registradas</td>
+    </tr>
+    <tr>
+        <td>MovimentacaoController</td>
+        <td>/movimentacoes</td>
+        <td>POST</td>
+        <td>Cadastrar uma nova movimentação financeira</td>
+    </tr>
+    <tr>
+        <td>MovimentacaoController</td>
+        <td>/movimentacoes/{id}</td>
+        <td>GET</td>
+        <td>Buscar movimentação pelo ID</td>
+    </tr>
+    <tr>
+        <td>RelatorioController</td>
+        <td>/relatorios/saldo/{clienteId}</td>
+        <td>GET</td>
+        <td>Gerar relatório de saldo por cliente</td>
+    </tr>
   </tbody>
 </table>
 
 <h3>!!!Atenção!!!, ao utilizar os métodos post, não precisa declarar id, pois esse campo é gerado automaticamente</h3>
 
-
+<h3>Observações necessárias:<h3>
+<p>Ao testar os endpoints, inicie pelo cadastro de clientes(tanto faz se for pj ou pf)</p>
 
 
