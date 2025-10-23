@@ -2,6 +2,7 @@ package com.example.atividade_xpto.service.relatorio;
 
 import com.example.atividade_xpto.core.models.clientes.Cliente;
 import com.example.atividade_xpto.core.models.conta.Conta;
+import com.example.atividade_xpto.core.models.endereco.Endereco;
 import com.example.atividade_xpto.core.models.enums.TipoMovimentacao;
 import com.example.atividade_xpto.core.models.movimentacao.Movimentacao;
 import com.example.atividade_xpto.exception.clientes.ClienteNotFoundException;
@@ -10,7 +11,9 @@ import com.example.atividade_xpto.repository.movimentacao.MovimentacaoRepository
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -143,6 +146,96 @@ public class RelatorioService {
 
         return relatorio.toString();
     }
+
+    public String gerarRelatorioSaldoPorPeriodo(Long clienteId, LocalDate dataInicio, LocalDate dataFim) {
+        Cliente cliente = clienteRepository.findById(clienteId)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+
+        LocalDateTime inicioPeriodo = dataInicio.atStartOfDay();
+
+        LocalDateTime fimPeriodo = dataFim.atTime(LocalTime.MAX);
+
+        List<Movimentacao> movimentacoes = movimentacaoRepository
+                .findByContaClienteIdAndDataMovimentacaoBetween(clienteId, inicioPeriodo, fimPeriodo);
+
+
+        long creditos = movimentacoes.stream()
+                .filter(m -> m.getTipoMovimentacao() == TipoMovimentacao.DEPOSITO)
+                .count();
+
+        long debitos = movimentacoes.stream()
+                .filter(m -> m.getTipoMovimentacao() == TipoMovimentacao.SAQUE)
+                .count();
+
+        int totalMovimentacoes = movimentacoes.size();
+
+        BigDecimal taxaPorMovimentacao;
+        if (totalMovimentacoes <= 10) {
+            taxaPorMovimentacao = BigDecimal.valueOf(1.00);
+        } else if (totalMovimentacoes <= 20) {
+            taxaPorMovimentacao = BigDecimal.valueOf(0.75);
+        } else {
+            taxaPorMovimentacao = BigDecimal.valueOf(0.50);
+        }
+
+        BigDecimal valorPago = taxaPorMovimentacao.multiply(BigDecimal.valueOf(totalMovimentacoes));
+
+        BigDecimal saldoInicial;
+        if (!movimentacoes.isEmpty()) {
+            saldoInicial = movimentacoes.getFirst().getConta().getSaldo();
+        } else {
+            saldoInicial = cliente.getContas().stream()
+                    .map(Conta::getSaldo)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
+
+        BigDecimal saldoAtual = cliente.getContas().stream()
+                .map(Conta::getSaldo)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        String endereco = "Endereço não cadastrado";
+        if (cliente.getEnderecos() != null && !cliente.getEnderecos().isEmpty()) {
+            Endereco e = cliente.getEnderecos().getFirst();
+
+            endereco = String.format("%s, %s, %s, %s, %s, %s",
+                    e.getRua(),
+                    e.getNumero(),
+                    e.getBairro(),
+                    e.getCidade(),
+                    e.getEstado(),
+                    e.getCep());
+        }
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return String.format("""
+            Relatório de saldo do cliente %s e período:
+            Período: %s a %s
+            Cliente: %s - Cliente desde: %s;
+            Endereço: %s;
+            Movimentações de crédito: %d;
+            Movimentações de débito: %d;
+            Total de movimentações: %d;
+            Valor pago pelas movimentações: R$ %,.2f;
+            Saldo inicial: R$ %,.2f;
+            Saldo atual: R$ %,.2f;
+            """,
+                cliente.getNome(),
+                dataInicio.format(fmt),
+                dataFim.format(fmt),
+                cliente.getNome(),
+                cliente.getDataCadastro().format(fmt),
+                endereco,
+                creditos,
+                debitos,
+                totalMovimentacoes,
+                valorPago,
+                saldoInicial,
+                saldoAtual
+        );
+    }
+
 }
 
 
