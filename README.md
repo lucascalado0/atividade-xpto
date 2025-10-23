@@ -245,6 +245,18 @@ classDiagram
         <td>GET</td>
         <td>Gerar relatório de saldo por cliente</td>
     </tr>
+    <tr>
+        <td>RelatorioController</td>
+        <td>/relatorios/saldo/{clienteId}/periodo</td>
+        <td>GET</td>
+        <td>Gerar relatório de saldo por cliente e período</td>
+    </tr>
+    <tr>
+        <td>RelatorioController</td>
+        <td>/relatorios/saldo/todos</td>
+        <td>GET</td>
+        <td>Gerar relatório de saldo de todos os clientes</td>
+    </tr>
   </tbody>
 </table>
 
