@@ -10,6 +10,7 @@ import com.example.atividade_xpto.repository.movimentacao.MovimentacaoRepository
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -108,5 +109,40 @@ public class RelatorioService {
                 saldoAtual
         );
     }
+
+    public String gerarRelatorioTodosClientes() {
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        DateTimeFormatter fmtData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataAtualFormatada = LocalDateTime.now().format(fmtData);
+
+
+        StringBuilder relatorio = new StringBuilder();
+        relatorio.append("Relatório de saldo de todos os clientes;\n");
+
+
+        for (Cliente cliente : clientes) {
+
+            BigDecimal saldoAtual = cliente.getContas().stream()
+                    .map(Conta::getSaldo)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+
+            String dataCadastroFormatada = cliente.getDataCadastro().format(fmtData);
+
+
+            relatorio.append(String.format(
+                    "Cliente: %s - Cliente desde: %s – Saldo em %s: %,.2f\n",
+                    cliente.getNome(),
+                    dataCadastroFormatada,
+                    dataAtualFormatada,
+                    saldoAtual
+            ));
+        }
+
+
+        return relatorio.toString();
+    }
 }
+
 
